@@ -8,7 +8,7 @@ import generateMetadata from "@/lib/generate-metadata";
 import getCurrentSession from "@/server/auth/sessions";
 import { HydrateClient } from "@/trpc/server";
 import type { NavMainItem } from "@/types/sidebar.types";
-import { HomeIcon, ShoppingCart, UserRound } from "lucide-react";
+import { FileText, HomeIcon, ShoppingCart, UserRound } from "lucide-react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -39,6 +39,11 @@ export default async function DashboardLayout({
       title: "Products",
       url: "/products",
       icon: <ShoppingCart />,
+    },
+    {
+      title: "Content Types",
+      url: "/content-types",
+      icon: <FileText />,
     },
     {
       title: "Profile",
