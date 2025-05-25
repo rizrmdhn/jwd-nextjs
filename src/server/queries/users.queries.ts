@@ -1,8 +1,7 @@
-import { and, asc, count, desc, eq, gte, ilike, lte } from "drizzle-orm";
-import { db, type DBType } from "../db";
+import { eq } from "drizzle-orm";
+import { db } from "../db";
 import { users } from "../db/schema";
 import { TRPCError } from "@trpc/server";
-import type { z } from "zod";
 import { deleteFile } from "../storage/delete-file";
 
 const usersQueries = {
