@@ -1,4 +1,5 @@
 import ThemeProvider from "@/providers/theme-provider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -8,7 +9,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <NuqsAdapter>{children}</NuqsAdapter>
     </ThemeProvider>
   );
 }
