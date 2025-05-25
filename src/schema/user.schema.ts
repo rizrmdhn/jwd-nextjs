@@ -1,5 +1,53 @@
 import { z } from "zod";
 import { zfd } from "zod-form-data";
+import {
+  createSearchParamsCache,
+  parseAsArrayOf,
+  parseAsInteger,
+  parseAsString,
+  parseAsStringEnum,
+} from "nuqs/server";
+import type { UsersWithoutFoto } from "@/types/users.types";
+import { getFiltersStateParser, getSortingStateParser } from "@/lib/parsers";
+
+export const getUserSearchParams = {
+  page: parseAsInteger.withDefault(1),
+  perPage: parseAsInteger.withDefault(10),
+  sort: getSortingStateParser<UsersWithoutFoto>().withDefault([
+    { id: "createdAt", desc: true },
+  ]),
+  name: parseAsString.withDefault(""),
+  username: parseAsString.withDefault(""),
+  createdAt: parseAsArrayOf(z.coerce.number()).withDefault([]),
+  // advanced filter
+  filters: getFiltersStateParser().withDefault([]),
+  joinOperator: parseAsStringEnum(["and", "or"]).withDefault("and"),
+};
+
+export const getUserSearchParamsCache =
+  createSearchParamsCache(getUserSearchParams);
+
+export type GetUsersSchema = Awaited<
+  ReturnType<typeof getUserSearchParamsCache.parse>
+>;
+
+const getUsersSchema = z.object({
+  page: z.number().default(1),
+  perPage: z.number().default(10),
+  sort: z
+    .array(
+      z.object({
+        id: z.enum(["id", "name", "username", "createdAt", "updatedAt"]),
+        desc: z.boolean(),
+      }),
+    )
+    .default([{ id: "createdAt", desc: true }]),
+  name: z.string().default(""),
+  username: z.string().default(""),
+  createdAt: z.array(z.coerce.number()).default([]),
+  filters: z.array(z.object({})).default([]),
+  joinOperator: z.enum(["and", "or"]).default("and"),
+});
 
 const createUserSchema = z.object({
   username: z
@@ -79,6 +127,7 @@ const updateUserFotoSchema = zfd
 const userSchema = {
   createUserSchema,
   updateUserFotoSchema,
+  getUsersSchema,
 };
 
 export default userSchema;

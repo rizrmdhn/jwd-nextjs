@@ -8,8 +8,29 @@ import {
 
 import { v7 as uuidv7 } from "uuid";
 import { writeFileToDisk } from "@/server/storage/write-file-to-disk";
+import type { ExtendedColumnFilter } from "@/types/data-table";
 
 export const userRouter = createTRPCRouter({
+  paginate: protectedProcedure
+    .input(userSchema.getUsersSchema)
+    .query(async ({ input }) => {
+      const { data, pageCount } = await usersQueries.getAllUser({
+        page: input.page,
+        perPage: input.perPage,
+        sort: input.sort,
+        name: input.name,
+        username: input.username,
+        createdAt: input.createdAt,
+        filters: input.filters as ExtendedColumnFilter<unknown>[],
+        joinOperator: input.joinOperator,
+      });
+
+      return {
+        data,
+        pageCount,
+      };
+    }),
+
   updateFotoProfile: protectedProcedure
     .input(userSchema.updateUserFotoSchema)
     .mutation(async ({ input: { foto, userId } }) => {
