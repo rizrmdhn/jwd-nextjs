@@ -30,7 +30,7 @@ export function AppSidebar({ user, data, ...props }: AppSidebarProps) {
           className="hover:bg-sidebar-accent data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
         >
           <div className="grid flex-1 text-left text-xl leading-tight">
-            <span className="truncate font-semibold">KOFITRA</span>
+            <span className="truncate font-semibold">JWD</span>
           </div>
         </SidebarMenuButton>
       </SidebarHeader>

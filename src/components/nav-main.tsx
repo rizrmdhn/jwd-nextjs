@@ -78,7 +78,7 @@ export function NavMain({ items }: { items: NavMainItem[] }) {
                 asChild
                 tooltip={item.title}
                 isActive={
-                  ["/dashboard/admin"].includes(item.url)
+                  ["/dashboard"].includes(item.url)
                     ? path === item.url
                     : path.includes(item.url)
                 }

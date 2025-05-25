@@ -20,7 +20,6 @@ import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { globalErrorToast, globalSuccessToast } from "@/lib/toast";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function LoginForm() {
   const utils = api.useUtils();
@@ -57,19 +56,6 @@ export default function LoginForm() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <div className="mb-6 flex flex-col items-center">
-          <Image
-            src="/KOFITRA.png"
-            alt="KOFITRA Logo"
-            width={80}
-            height={80}
-            className="mb-2 rounded-full bg-white p-2"
-            priority
-          />
-          <span className="text-muted-foreground text-center text-sm font-medium">
-            Aplikasi Pengukur Kondisi Fisik Atlit Cabor Tarung Drajat
-          </span>
-        </div>
         <CardTitle className="text-start text-2xl">Login</CardTitle>
       </CardHeader>
       <CardContent>
@@ -128,7 +114,7 @@ export default function LoginForm() {
             />
             <Button
               type="submit"
-              className="bg-login-button hover:bg-login-button-hover w-full"
+              className="w-full"
               disabled={status === "pending"}
             >
               {status === "pending" ? (
