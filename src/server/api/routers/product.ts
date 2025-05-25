@@ -47,6 +47,12 @@ export const productRouter = createTRPCRouter({
       return product;
     }),
 
+  getCount: protectedProcedure.query(async () => {
+    const count = await productsQueries.countAllProducts();
+
+    return count;
+  }),
+
   create: protectedProcedure
     .input(productSchema.createFormDataProductsSchema)
     .mutation(async ({ input, ctx }) => {

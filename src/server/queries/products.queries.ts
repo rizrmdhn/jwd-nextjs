@@ -91,6 +91,15 @@ const productsQueries = {
     }
   },
 
+  async countAllProducts() {
+    const [result] = await db
+      .select({ count: count() })
+      .from(products)
+      .execute();
+
+    return result?.count || 0;
+  },
+
   async getProductById(id: string) {
     const product = await db.query.products.findFirst({
       where: (products, { eq }) => eq(products.id, id),
