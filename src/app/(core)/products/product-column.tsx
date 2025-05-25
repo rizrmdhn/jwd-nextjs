@@ -28,6 +28,9 @@ const ActionCell = ({ row }: { row: Row<Products> }) => {
 
   return (
     <DataTableActionCell
+      showDetail
+      detailText="Detail"
+      onDetailAction={`products/${row.original.id}`}
       icon={<Trash className="mr-4 size-4" />}
       isLoading={status === "pending"}
       editText="Edit"
