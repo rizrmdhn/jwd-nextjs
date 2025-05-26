@@ -43,6 +43,7 @@ const getProductsSchema = z.object({
           "produk",
           "kategori",
           "price",
+          "stok",
           "description",
           "foto",
           "fotoUrl",
