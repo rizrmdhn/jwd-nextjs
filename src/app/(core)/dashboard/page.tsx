@@ -2,6 +2,7 @@ import React from "react";
 import getCurrentSession from "@/server/auth/sessions";
 import CardSection from "./card-section";
 import { api } from "@/trpc/server";
+import Marquee from "react-fast-marquee";
 
 export default async function Dashboard() {
   const { user } = await getCurrentSession();
@@ -24,6 +25,12 @@ export default async function Dashboard() {
           {getGreeting()}, {user?.name || "Name"}!
         </h1>
         <p className="text-muted-foreground">Selamat datang di dashboard.</p>
+        <div className="bg-muted/30 relative mt-4 overflow-hidden py-2 whitespace-nowrap">
+          <Marquee>
+            🎉 Selamat datang di sistem manajemen produk kami! Silakan cek
+            produk terbaru di menu Products.
+          </Marquee>
+        </div>
       </div>
       <CardSection />
     </>

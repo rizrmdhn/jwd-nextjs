@@ -1,0 +1,1 @@
+ALTER TABLE "jwd-nextjs_products" ADD COLUMN "stok" numeric NOT NULL;

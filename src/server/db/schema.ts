@@ -78,6 +78,7 @@ export const products = createTable(
     description: d.text().notNull(),
     foto: d.text(),
     fotoUrl: d.text(),
+    stok: d.numeric().notNull(),
     createdAt: d
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)

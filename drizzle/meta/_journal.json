@@ -8,6 +8,13 @@
       "when": 1748143453936,
       "tag": "0000_nifty_roughhouse",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1748225392387,
+      "tag": "0001_purple_stranger",
+      "breakpoints": true
     }
   ]
 }
