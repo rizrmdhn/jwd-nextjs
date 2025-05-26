@@ -18,6 +18,7 @@ export default async function Dashboard() {
   };
 
   void api.product.getCount.prefetch();
+  void api.product.getAll.prefetch();
 
   return (
     <>

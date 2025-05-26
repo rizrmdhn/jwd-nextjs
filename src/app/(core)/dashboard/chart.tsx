@@ -1,8 +1,21 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart";
 import { api } from "@/trpc/react";
-import { Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts";
+import {
+  Bar,
+  BarChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  LabelList,
+} from "recharts";
 
 export default function ProductCategoryChart() {
   const [products] = api.product.getAll.useSuspenseQuery();
@@ -20,50 +33,66 @@ export default function ProductCategoryChart() {
     );
   }
 
-  // Count products by category
-  const categoryCount = products.reduce<Record<string, number>>(
-    (acc, product) => {
-      acc[product.kategori] = (acc[product.kategori] || 0) + 1;
-      return acc;
-    },
-    {},
-  );
-
   // Transform data for the chart
-  const chartData = Object.entries(categoryCount).map(([category, count]) => ({
-    category,
-    count,
+  const chartData = products.map((item) => ({
+    name: item.produk,
+    value: item.stok,
   }));
+
+  const chartConfig = {
+    desktop: {
+      label: "Desktop",
+      color: "hsl(var(--chart-1))",
+    },
+  } satisfies ChartConfig;
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Products by Category</CardTitle>
+        <CardTitle>Products</CardTitle>
       </CardHeader>
       <CardContent>
-        <BarChart data={chartData}>
-          <XAxis
-            dataKey="category"
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-            allowDecimals={false}
-          />
-          <Tooltip />
-          <Bar
-            dataKey="count"
-            fill="currentColor"
-            radius={[4, 4, 0, 0]}
-            className="fill-primary"
-          />
-        </BarChart>
+        <ChartContainer
+          className="h-[300px] min-h-0 w-full overflow-x-auto md:h-[400px]"
+          config={chartConfig}
+          // title="Top 5 Hasil Test Fisik"
+        >
+          <BarChart
+            data={chartData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 65 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="name"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              angle={-45}
+              textAnchor="end"
+              height={60}
+              interval={0}
+            />
+            <YAxis
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) => `${value}`}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Bar
+              dataKey="value"
+              radius={[4, 4, 0, 0]}
+              fill="var(--color-desktop)"
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                fill="var(--color-desktop)"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
       </CardContent>
     </Card>
   );
