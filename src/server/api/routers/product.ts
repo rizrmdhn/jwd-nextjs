@@ -32,6 +32,12 @@ export const productRouter = createTRPCRouter({
       };
     }),
 
+  getAll: protectedProcedure.query(async () => {
+    const result = await productsQueries.getAllProductWithoutPagination();
+
+    return result;
+  }),
+
   getById: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {

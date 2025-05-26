@@ -75,6 +75,12 @@ const createProductSchema = z.object({
     .regex(/^[0-9]+$/, {
       message: "Harga harus berupa angka",
     }),
+  stok: z
+    .string()
+    .min(1, "Harga produk dibutuhkan")
+    .regex(/^[0-9]+$/, {
+      message: "Harga harus berupa angka",
+    }),
   description: z
     .string()
     .min(1, "Deskripsi produk dibutuhkan")
@@ -114,6 +120,12 @@ const createFormDataProductsSchema = zfd.formData({
     .regex(/^[0-9]+$/, {
       message: "Harga harus berupa angka",
     }),
+  stok: z
+    .string()
+    .min(1, "Harga produk dibutuhkan")
+    .regex(/^[0-9]+$/, {
+      message: "Harga harus berupa angka",
+    }),
   description: z
     .string()
     .min(1, "Deskripsi produk dibutuhkan")
@@ -142,6 +154,12 @@ const updateProductSchema = z.object({
     .min(1, "Nama produk dibutuhkan")
     .max(256, "Nama produk terlalu panjang"),
   price: z
+    .string()
+    .min(1, "Harga produk dibutuhkan")
+    .regex(/^[0-9]+$/, {
+      message: "Harga harus berupa angka",
+    }),
+  stok: z
     .string()
     .min(1, "Harga produk dibutuhkan")
     .regex(/^[0-9]+$/, {
@@ -182,6 +200,12 @@ const updateFormDataProductsSchema = zfd.formData({
     .min(1, "Nama produk dibutuhkan")
     .max(256, "Nama produk terlalu panjang"),
   price: z
+    .string()
+    .min(1, "Harga produk dibutuhkan")
+    .regex(/^[0-9]+$/, {
+      message: "Harga harus berupa angka",
+    }),
+  stok: z
     .string()
     .min(1, "Harga produk dibutuhkan")
     .regex(/^[0-9]+$/, {

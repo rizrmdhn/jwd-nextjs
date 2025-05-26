@@ -3,6 +3,7 @@ import getCurrentSession from "@/server/auth/sessions";
 import CardSection from "./card-section";
 import { api } from "@/trpc/server";
 import Marquee from "react-fast-marquee";
+import ProductCategoryChart from "./chart";
 
 export default async function Dashboard() {
   const { user } = await getCurrentSession();
@@ -33,6 +34,9 @@ export default async function Dashboard() {
         </div>
       </div>
       <CardSection />
+      <div className="mt-8">
+        <ProductCategoryChart />
+      </div>
     </>
   );
 }

@@ -91,6 +91,12 @@ const productsQueries = {
     }
   },
 
+  async getAllProductWithoutPagination() {
+    const result = await db.query.products.findMany();
+
+    return result;
+  },
+
   async countAllProducts() {
     const [result] = await db
       .select({ count: count() })
@@ -127,6 +133,7 @@ const productsQueries = {
         produk: data.produk,
         kategori: data.kategori,
         price: data.price,
+        stok: data.stok,
         description: data.description,
         foto,
         fotoUrl,
@@ -164,6 +171,7 @@ const productsQueries = {
         produk: data.produk,
         kategori: data.kategori,
         price: data.price,
+        stok: data.stok,
         description: data.description,
         foto: foto ?? undefined,
         fotoUrl: fotoUrl ?? undefined,
