@@ -50,6 +50,7 @@ export default function CreateProductForm() {
     formData.append("produk", data.produk);
     formData.append("kategori", data.kategori);
     formData.append("price", data.price.toString());
+    formData.append("stok", data.stok);
     formData.append("description", data.description);
     if (data.file) formData.append("file", data.file);
 
@@ -102,6 +103,24 @@ export default function CreateProductForm() {
                     <Input
                       type="number"
                       placeholder={"Masukkan harga"}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="stok"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Stok</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder={"Masukkan stok"}
                       {...field}
                     />
                   </FormControl>

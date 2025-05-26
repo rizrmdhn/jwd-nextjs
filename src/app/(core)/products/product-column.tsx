@@ -127,6 +127,13 @@ export default function getProductColumn({
       },
     },
     {
+      id: "stok",
+      accessorKey: "stok",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Stok" />
+      ),
+    },
+    {
       id: "action",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Aksi" />
